@@ -1,100 +1,97 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Data Kategori</title>
+@extends('layouts.app')
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-          rel="stylesheet">
-</head>
+@section('title', 'Kategori Barang - Asset Management System')
 
-<body>
-
-<div class="container mt-5">
-
-    <h2>Data Kategori</h2>
-
-    <a href="{{ route('categories.create') }}"
-       class="btn btn-primary mb-3">
-        + Tambah Kategori
-    </a>
-
-    <a href="{{ route('barangs.index') }}"
-       class="btn btn-secondary mb-3">
-        Data Barang
-    </a>
+@section('content')
+<div class="container-fluid p-0">
+    <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center page-header gap-3">
+        <div>
+            <h1 class="page-title">Data Kategori Barang</h1>
+            <p class="page-subtitle mb-0">Kelola pengelompokan dan kategori untuk pengorganisasian aset.</p>
+        </div>
+        <div class="d-flex gap-2">
+            <a href="{{ route('barangs.index') }}" class="btn btn-secondary">
+                <i class="fas fa-boxes-stacked"></i> Data Barang
+            </a>
+            <a href="{{ route('categories.create') }}" class="btn btn-primary">
+                <i class="fas fa-plus"></i> Tambah Kategori
+            </a>
+        </div>
+    </div>
 
     @if(session('success'))
-        <div class="alert alert-success">
-            {{ session('success') }}
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <i class="fas fa-check-circle me-2"></i> {{ session('success') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
     @endif
 
-    <table class="table table-bordered">
+    <div class="card">
+        <div class="card-header d-flex justify-content-between align-items-center">
+            <div class="fw-bold text-dark">
+                <i class="fas fa-tags me-2 text-primary"></i> Daftar Kategori
+            </div>
+            <span class="badge badge-soft-primary">Total: {{ count($categories) }} Kategori</span>
+        </div>
+        <div class="card-body p-0">
+            <div class="table-responsive">
+                <table class="table table-hover align-middle">
+                    <thead>
+                        <tr>
+                            <th class="ps-4" width="8%">No</th>
+                            <th width="30%">Nama Kategori</th>
+                            <th>Deskripsi</th>
+                            <th class="pe-4 text-end" width="20%">Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @forelse($categories as $category)
+                            <tr>
+                                <td class="ps-4 fw-semibold text-muted">{{ $loop->iteration }}</td>
+                                <td>
+                                    <div class="d-flex align-items-center gap-2">
+                                        <div class="badge bg-light text-primary border p-2">
+                                            <i class="fas fa-tag"></i>
+                                        </div>
+                                        <span class="fw-bold text-dark">{{ $category->nama_category }}</span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <span class="text-muted small">
+                                        {{ $category->deskripsi ?? '-' }}
+                                    </span>
+                                </td>
+                                <td class="pe-4 text-end">
+                                    <div class="d-inline-flex gap-1">
+                                        <a href="{{ route('categories.edit', $category->id) }}" class="btn btn-sm btn-outline-warning" title="Edit Kategori">
+                                            <i class="fas fa-edit"></i>
+                                        </a>
 
-        <thead>
-        <tr>
-            <th>No</th>
-            <th>Nama Kategori</th>
-            <th>Deskripsi</th>
-            <th>Aksi</th>
-        </tr>
-        </thead>
-
-        <tbody>
-
-        @forelse($categories as $category)
-
-            <tr>
-                <td>{{ $loop->iteration }}</td>
-
-                <td>
-                    {{ $category->nama_category }}
-                </td>
-
-                <td>
-                    {{ $category->deskripsi ?? '-' }}
-                </td>
-
-                <td>
-
-                    <a href="{{ route('categories.edit', $category->id) }}"
-                       class="btn btn-warning btn-sm">
-                        Edit
-                    </a>
-
-                    <form action="{{ route('categories.destroy', $category->id) }}"
-                          method="POST"
-                          class="d-inline">
-
-                        @csrf
-                        @method('DELETE')
-
-                        <button type="submit"
-                                class="btn btn-danger btn-sm"
-                                onclick="return confirm('Yakin ingin menghapus kategori ini?')">
-                            Hapus
-                        </button>
-
-                    </form>
-
-                </td>
-            </tr>
-
-        @empty
-
-            <tr>
-                <td colspan="4" class="text-center">
-                    Belum ada data kategori.
-                </td>
-            </tr>
-
-        @endforelse
-
-        </tbody>
-
-    </table>
-
+                                        <form action="{{ route('categories.destroy', $category->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Yakin ingin menghapus kategori ini?')">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-sm btn-outline-danger" title="Hapus Kategori">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+                                        </form>
+                                    </div>
+                                </td>
+                            </tr>
+                        @empty
+                            <tr>
+                                <td colspan="4" class="text-center py-5">
+                                    <i class="fas fa-tags fa-3x text-muted mb-3"></i>
+                                    <p class="text-muted mb-0">Belum ada data kategori terdaftar.</p>
+                                    <a href="{{ route('categories.create') }}" class="btn btn-sm btn-primary mt-3">
+                                        <i class="fas fa-plus"></i> Tambah Kategori Pertama
+                                    </a>
+                                </td>
+                            </tr>
+                        @endforelse
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 </div>
-
-</body>
-</html>
+@endsection

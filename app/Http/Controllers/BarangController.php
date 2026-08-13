@@ -17,6 +17,15 @@ class BarangController extends Controller
         return view('barangs.index', compact('barangs'));
     }
 
+    public function katalog()
+    {
+        $barangs = Barang::with('category')
+            ->latest()
+            ->get();
+
+        return view('barangs.katalog', compact('barangs'));
+    }
+
     public function create()
     {
         $categories = Category::orderBy('nama_category')->get();
