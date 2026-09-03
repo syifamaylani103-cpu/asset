@@ -26,6 +26,11 @@ class BarangController extends Controller
         return view('barangs.katalog', compact('barangs'));
     }
 
+    public function show(Barang $barang)
+    {
+        return view('barangs.show', compact('barang'));
+    }
+
     public function create()
     {
         $categories = Category::orderBy('nama_category')->get();

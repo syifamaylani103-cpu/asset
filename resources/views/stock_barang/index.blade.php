@@ -90,7 +90,7 @@
             <i class="fas fa-exclamation-triangle me-2"></i> {{ session('error') }}
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
-    @endif
+@endif
 
     @if($errors->any())
         <div class="alert alert-danger alert-dismissible fade show" role="alert">
@@ -110,7 +110,10 @@
             <div class="d-flex align-items-center">
                 <i class="fas fa-info-circle fa-lg me-2 text-primary"></i>
                 <div>
-                    <strong>Mode Edit Cepat Aktif:</strong> Anda dapat langsung mengubah angka pada kolom <strong>Jumlah</strong> dan <strong>Harga</strong> untuk baris di halaman ini.
+                    <strong>Mode Edit Cepat Aktif:</strong>
+                    Anda dapat langsung mengubah angka pada kolom
+                    <strong>Jumlah</strong> dan <strong>Harga</strong>
+                    untuk baris di halaman ini.
                 </div>
             </div>
             <div class="d-flex gap-2">
@@ -121,6 +124,8 @@
                     <i class="fas fa-save me-1"></i> Simpan Semua Perubahan
                 </button>
             </div>
+        </div>
+    </div> </div>
         </div>
     </div>
 

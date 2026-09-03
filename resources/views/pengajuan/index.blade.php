@@ -103,14 +103,14 @@
                                     @endif
                                 </td>
                                 <td class="pe-4 text-end">
-                                    <div class="d-inline-flex gap-1">
+                                    <div class="d-inline-flex gap-1 flex-wrap justify-content-end">
                                         <a href="{{ route('pengajuan.show', $item->id) }}" class="btn btn-sm btn-outline-info" title="Detail">
-                                            <i class="fas fa-eye"></i>
+                                            <i class="fas fa-eye me-1"></i> Detail
                                         </a>
 
                                         @if($item->status == 'pending')
                                             <a href="{{ route('pengajuan.edit', $item->id) }}" class="btn btn-sm btn-outline-warning" title="Edit">
-                                                <i class="fas fa-edit"></i>
+                                                <i class="fas fa-edit me-1"></i> Edit
                                             </a>
 
                                             @if(Auth::check() && Auth::user()->isAdmin())
@@ -118,13 +118,13 @@
                                             <form action="{{ route('pengajuan.approve', $item->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Setujui pengajuan ini?')">
                                                 @csrf
                                                 <button type="submit" class="btn btn-sm btn-success" title="Setujui Pengajuan">
-                                                    <i class="fas fa-check"></i>
+                                                    <i class="fas fa-check me-1"></i> Setujui
                                                 </button>
                                             </form>
 
                                             <!-- Reject Modal Trigger -->
                                             <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#rejectModal{{ $item->id }}" title="Tolak Pengajuan">
-                                                <i class="fas fa-times"></i>
+                                                <i class="fas fa-times me-1"></i> Tolak
                                             </button>
                                             @endif
 
@@ -157,7 +157,7 @@
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" class="btn btn-sm btn-outline-danger" title="Hapus">
-                                                    <i class="fas fa-trash"></i>
+                                                    <i class="fas fa-trash me-1"></i> Hapus
                                                 </button>
                                             </form>
                                         @endif

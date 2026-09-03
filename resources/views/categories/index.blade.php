@@ -62,16 +62,16 @@
                                     </span>
                                 </td>
                                 <td class="pe-4 text-end">
-                                    <div class="d-inline-flex gap-1">
+                                    <div class="d-inline-flex gap-1 flex-wrap justify-content-end">
                                         <a href="{{ route('categories.edit', $category->id) }}" class="btn btn-sm btn-outline-warning" title="Edit Kategori">
-                                            <i class="fas fa-edit"></i>
+                                            <i class="fas fa-edit me-1"></i>
                                         </a>
 
                                         <form action="{{ route('categories.destroy', $category->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Yakin ingin menghapus kategori ini?')">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="btn btn-sm btn-outline-danger" title="Hapus Kategori">
-                                                <i class="fas fa-trash"></i>
+                                                <i class="fas fa-trash me-1"></i>
                                             </button>
                                         </form>
                                     </div>

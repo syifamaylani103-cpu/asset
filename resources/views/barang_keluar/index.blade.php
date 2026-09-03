@@ -81,7 +81,7 @@
                                         <i class="fas fa-location-dot text-muted me-1"></i> {{ $item->tujuan ?? '-' }}
                                     </span>
                                 </td>
-                                <td class="pe-4 text-end">
+                              <td class="pe-4 text-end">
                                     <div class="d-inline-flex gap-1">
                                         <a href="{{ route('barang_keluar.show', $item->id) }}" class="btn btn-sm btn-outline-info" title="Detail">
                                             <i class="fas fa-eye"></i>

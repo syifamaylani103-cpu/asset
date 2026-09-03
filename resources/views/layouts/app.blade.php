@@ -662,7 +662,7 @@
                 <ul>
                     <li>
                         <a href="{{ route('barang_masuk.index') }}" class="{{ Request::is('barang_masuk*') ? 'active' : '' }}">
-                            <i class="fas fa-arrow-down-to-bracket"></i>
+                            <i class="fas fa-arrow-up-from-bracket"></i>
                             <span>Barang Masuk</span>
                         </a>
                     </li>
