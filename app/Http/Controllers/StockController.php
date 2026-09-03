@@ -251,6 +251,8 @@ class StockController extends Controller
         $namaIndex = array_search('nama_barang', $header);
         $jumlahIndex = array_search('jumlah', $header);
         $hargaIndex = array_search('harga', $header);
+        $jenisIndex = array_search('jenis_barang', $header);
+        $satuanIndex = array_search('satuan', $header);
 
         if ($jumlahIndex === false && $namaIndex === false && $idIndex === false) {
             fclose($handle);
@@ -295,6 +297,25 @@ class StockController extends Controller
                         $stockItem->update($updateData);
                         $updatedCount++;
                     }
+                } elseif (!empty($namaBarang)) {
+                    // Jika data belum ada (misal di laptop teman), otomatis buat baru
+                    $namaJenis = ($jenisIndex !== false && isset($row[$jenisIndex]) && !empty(trim($row[$jenisIndex]))) 
+                        ? trim($row[$jenisIndex]) 
+                        : 'Elektronik';
+                    
+                    $jenisBarang = JenisBarang::firstOrCreate(['nama_jenis' => $namaJenis]);
+                    $satuan = ($satuanIndex !== false && isset($row[$satuanIndex]) && !empty(trim($row[$satuanIndex]))) 
+                        ? trim($row[$satuanIndex]) 
+                        : 'Unit';
+
+                    Stock::create([
+                        'jenis_barang_id' => $jenisBarang->id,
+                        'nama_barang' => $namaBarang,
+                        'jumlah' => ($jumlah !== null && is_numeric($jumlah)) ? (int)$jumlah : 0,
+                        'satuan' => $satuan,
+                        'harga' => ($harga !== null && is_numeric($harga)) ? (float)$harga : 0,
+                    ]);
+                    $updatedCount++;
                 }
             }
 

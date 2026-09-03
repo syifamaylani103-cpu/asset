@@ -30,5 +30,7 @@ class DatabaseSeeder extends Seeder
                 'role' => 'user',
             ]
         );
+
+        $this->call(StockSeeder::class);
     }
 }
