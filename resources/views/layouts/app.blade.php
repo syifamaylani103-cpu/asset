@@ -573,6 +573,31 @@
                 padding: 1.25rem;
             }
         }
+
+        /* Global Pagination Styling */
+        .pagination {
+            margin-bottom: 0;
+            gap: 4px;
+        }
+        .page-item .page-link {
+            border-radius: 8px !important;
+            border: 1px solid #e2e8f0;
+            color: #475569;
+            font-weight: 500;
+            font-size: 0.85rem;
+            padding: 0.4rem 0.75rem;
+        }
+        .page-item.active .page-link {
+            background-color: #4f46e5;
+            border-color: #4f46e5;
+            color: #ffffff;
+            box-shadow: 0 2px 6px rgba(79, 70, 229, 0.3);
+        }
+        .page-item.disabled .page-link {
+            background-color: #f8fafc;
+            border-color: #e2e8f0;
+            color: #94a3b8;
+        }
     </style>
 
     @stack('styles')

@@ -33,6 +33,9 @@ Route::middleware(['auth'])->group(function () {
         Route::resource('categories', CategoryController::class);
         Route::resource('barangs', BarangController::class);
         Route::resource('jenis_barang', JenisBarangController::class);
+        Route::get('stock_barang/export-template', [StockController::class, 'exportTemplate'])->name('stock_barang.export_template');
+        Route::post('stock_barang/import-csv', [StockController::class, 'importCsv'])->name('stock_barang.import_csv');
+        Route::post('stock_barang/bulk-update', [StockController::class, 'bulkUpdate'])->name('stock_barang.bulk_update');
         Route::resource('stock_barang', StockController::class);
         Route::resource('barang_masuk', BarangMasukController::class);
         Route::resource('barang_keluar', BarangKeluarController::class);

@@ -179,8 +179,13 @@
                 </table>
             </div>
             @if($pengajuans->hasPages())
-                <div class="card-footer">
-                    {{ $pengajuans->links() }}
+                <div class="card-footer d-flex flex-column flex-md-row justify-content-between align-items-center gap-3 bg-white py-3">
+                    <div class="text-muted small">
+                        Menampilkan <strong>{{ $pengajuans->firstItem() }}</strong> sampai <strong>{{ $pengajuans->lastItem() }}</strong> dari total <strong>{{ $pengajuans->total() }}</strong> pengajuan
+                    </div>
+                    <div>
+                        {{ $pengajuans->links() }}
+                    </div>
                 </div>
             @endif
         </div>

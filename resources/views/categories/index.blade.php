@@ -31,7 +31,7 @@
             <div class="fw-bold text-dark">
                 <i class="fas fa-tags me-2 text-primary"></i> Daftar Kategori
             </div>
-            <span class="badge badge-soft-primary">Total: {{ count($categories) }} Kategori</span>
+            <span class="badge badge-soft-primary">Total: {{ $categories->total() }} Kategori</span>
         </div>
         <div class="card-body p-0">
             <div class="table-responsive">
@@ -47,7 +47,7 @@
                     <tbody>
                         @forelse($categories as $category)
                             <tr>
-                                <td class="ps-4 fw-semibold text-muted">{{ $loop->iteration }}</td>
+                                <td class="ps-4 fw-semibold text-muted">{{ $loop->iteration + ($categories->currentPage() - 1) * $categories->perPage() }}</td>
                                 <td>
                                     <div class="d-flex align-items-center gap-2">
                                         <div class="badge bg-light text-primary border p-2">
@@ -91,6 +91,16 @@
                     </tbody>
                 </table>
             </div>
+            @if($categories->hasPages())
+                <div class="card-footer d-flex flex-column flex-md-row justify-content-between align-items-center gap-3 bg-white py-3">
+                    <div class="text-muted small">
+                        Menampilkan <strong>{{ $categories->firstItem() }}</strong> sampai <strong>{{ $categories->lastItem() }}</strong> dari total <strong>{{ $categories->total() }}</strong> kategori
+                    </div>
+                    <div>
+                        {{ $categories->links() }}
+                    </div>
+                </div>
+            @endif
         </div>
     </div>
 </div>

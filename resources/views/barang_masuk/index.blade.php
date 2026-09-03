@@ -116,8 +116,13 @@
                 </table>
             </div>
             @if($barangMasuks->hasPages())
-                <div class="card-footer">
-                    {{ $barangMasuks->links() }}
+                <div class="card-footer d-flex flex-column flex-md-row justify-content-between align-items-center gap-3 bg-white py-3">
+                    <div class="text-muted small">
+                        Menampilkan <strong>{{ $barangMasuks->firstItem() }}</strong> sampai <strong>{{ $barangMasuks->lastItem() }}</strong> dari total <strong>{{ $barangMasuks->total() }}</strong> transaksi
+                    </div>
+                    <div>
+                        {{ $barangMasuks->links() }}
+                    </div>
                 </div>
             @endif
         </div>

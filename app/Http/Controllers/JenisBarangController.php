@@ -12,7 +12,7 @@ class JenisBarangController extends Controller
      */
     public function index()
     {
-        $jenisBarang = JenisBarang::latest()->get();
+        $jenisBarang = JenisBarang::latest()->paginate(10);
 
         return view('jenis_barang.index', compact('jenisBarang'));
     }

@@ -31,7 +31,7 @@
             <div class="fw-bold text-dark">
                 <i class="fas fa-layer-group me-2 text-primary"></i> Daftar Jenis Barang
             </div>
-            <span class="badge badge-soft-primary">Total: {{ count($jenisBarang) }} Jenis</span>
+            <span class="badge badge-soft-primary">Total: {{ $jenisBarang->total() }} Jenis</span>
         </div>
         <div class="card-body p-0">
             <div class="table-responsive">
@@ -47,7 +47,7 @@
                     <tbody>
                         @forelse($jenisBarang as $data)
                             <tr>
-                                <td class="ps-4 fw-semibold text-muted">{{ $loop->iteration }}</td>
+                                <td class="ps-4 fw-semibold text-muted">{{ $loop->iteration + ($jenisBarang->currentPage() - 1) * $jenisBarang->perPage() }}</td>
                                 <td>
                                     <div class="d-flex align-items-center gap-2">
                                         <div class="badge bg-light text-primary border p-2">
@@ -91,6 +91,16 @@
                     </tbody>
                 </table>
             </div>
+            @if($jenisBarang->hasPages())
+                <div class="card-footer d-flex flex-column flex-md-row justify-content-between align-items-center gap-3 bg-white py-3">
+                    <div class="text-muted small">
+                        Menampilkan <strong>{{ $jenisBarang->firstItem() }}</strong> sampai <strong>{{ $jenisBarang->lastItem() }}</strong> dari total <strong>{{ $jenisBarang->total() }}</strong> jenis barang
+                    </div>
+                    <div>
+                        {{ $jenisBarang->links() }}
+                    </div>
+                </div>
+            @endif
         </div>
     </div>
 </div>

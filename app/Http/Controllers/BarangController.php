@@ -12,7 +12,7 @@ class BarangController extends Controller
     {
         $barangs = Barang::with('category')
             ->latest()
-            ->get();
+            ->paginate(10);
 
         return view('barangs.index', compact('barangs'));
     }
@@ -21,7 +21,7 @@ class BarangController extends Controller
     {
         $barangs = Barang::with('category')
             ->latest()
-            ->get();
+            ->paginate(10);
 
         return view('barangs.katalog', compact('barangs'));
     }
@@ -98,4 +98,4 @@ class BarangController extends Controller
             ->route('barangs.index')
             ->with('success', 'Barang berhasil dihapus.');
     }
-}
+}  

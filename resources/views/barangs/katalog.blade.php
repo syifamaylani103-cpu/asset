@@ -52,6 +52,12 @@
             </div>
         @endforelse
     </div>
+
+    @if($barangs->hasPages())
+        <div class="d-flex justify-content-center mt-4">
+            {{ $barangs->links() }}
+        </div>
+    @endif
 </div>
 
 <style>
