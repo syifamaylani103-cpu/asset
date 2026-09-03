@@ -7,6 +7,7 @@ use App\Models\BarangKeluar;
 use App\Models\Pengajuan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class PengajuanController extends Controller
 {
@@ -189,5 +190,41 @@ class PengajuanController extends Controller
             'success',
             'Pengajuan berhasil ditolak.'
         );
+    }
+
+    public function cetakPdf($id)
+    {
+        $pengajuan = Pengajuan::with(['user', 'barang.category'])->findOrFail($id);
+
+        if (!Auth::user()->isAdmin() && $pengajuan->user_id !== Auth::id()) {
+            abort(403, 'Unauthorized action.');
+        }
+
+        if ($pengajuan->status !== 'disetujui') {
+            abort(403, 'Hanya pengajuan yang disetujui yang dapat dicetak.');
+        }
+
+        $pdf = Pdf::loadView('pengajuan.cetak', compact('pengajuan'));
+        return $pdf->download('Pengajuan_'.$pengajuan->kode_pengajuan.'.pdf');
+    }
+
+    public function cetakExcel($id)
+    {
+        $pengajuan = Pengajuan::with(['user', 'barang.category'])->findOrFail($id);
+
+        if (!Auth::user()->isAdmin() && $pengajuan->user_id !== Auth::id()) {
+            abort(403, 'Unauthorized action.');
+        }
+
+        if ($pengajuan->status !== 'disetujui') {
+            abort(403, 'Hanya pengajuan yang disetujui yang dapat dicetak.');
+        }
+
+        $html = view('pengajuan.cetak', compact('pengajuan'))->render();
+        $filename = 'Pengajuan_'.$pengajuan->kode_pengajuan.'.xls';
+        
+        return response($html)
+            ->header('Content-Type', 'application/vnd.ms-excel')
+            ->header('Content-Disposition', 'attachment; filename="'.$filename.'"');
     }
 }

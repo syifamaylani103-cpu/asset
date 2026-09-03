@@ -56,7 +56,7 @@ class BarangKeluarController extends Controller
         $barang->decrement('stok', $request->jumlah);
 
         return redirect()
-            ->route('barang-keluar.index')
+            ->route('barang_keluar.index')
             ->with('success', 'Barang keluar berhasil ditambahkan.');
     }
 
@@ -119,7 +119,7 @@ class BarangKeluarController extends Controller
         ]);
 
         return redirect()
-            ->route('barang-keluar.index')
+            ->route('barang_keluar.index')
             ->with('success', 'Barang keluar berhasil diperbarui.');
     }
 
@@ -134,7 +134,7 @@ class BarangKeluarController extends Controller
         $barangKeluar->delete();
 
         return redirect()
-            ->route('barang-keluar.index')
+            ->route('barang_keluar.index')
             ->with('success', 'Barang keluar berhasil dihapus.');
     }
 }

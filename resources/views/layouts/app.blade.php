@@ -700,10 +700,10 @@
                     <button type="button" id="sidebarCollapse" class="toggle-sidebar-btn" title="Toggle Sidebar">
                         <i class="fas fa-bars"></i>
                     </button>
-                    <div class="top-navbar-search d-none d-md-block">
+                    <form action="{{ route('search.index') }}" method="GET" class="top-navbar-search d-flex w-100 mx-3 mx-md-4">
                         <i class="fas fa-search"></i>
-                        <input type="text" placeholder="Cari barang, transaksi, pengajuan...">
-                    </div>
+                        <input type="text" name="q" value="{{ request('q') }}" placeholder="Cari barang, transaksi, pengajuan..." required>
+                    </form>
                 </div>
 
                 <div class="navbar-actions">

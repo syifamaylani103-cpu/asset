@@ -94,6 +94,15 @@
                                 <i class="fas fa-edit me-1"></i> Edit
                             </a>
                         </div>
+                    @elseif($pengajuan->status == 'disetujui')
+                        <div class="d-flex gap-2">
+                            <a href="{{ route('pengajuan.pdf', $pengajuan->id) }}" class="btn btn-danger btn-sm" target="_blank">
+                                <i class="fas fa-file-pdf me-1"></i> Cetak PDF
+                            </a>
+                            <a href="{{ route('pengajuan.excel', $pengajuan->id) }}" class="btn btn-success btn-sm">
+                                <i class="fas fa-file-excel me-1"></i> Cetak Excel
+                            </a>
+                        </div>
                     @else
                         <div></div>
                     @endif
