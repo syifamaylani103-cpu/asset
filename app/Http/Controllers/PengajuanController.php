@@ -26,6 +26,10 @@ class PengajuanController extends Controller
 
     public function create()
     {
+        if (Auth::user()->isAdmin()) {
+            abort(403, 'Admin tidak diizinkan membuat pengajuan barang.');
+        }
+
         $barangs = Barang::orderBy('nama_barang')->get();
 
         return view('pengajuan.create', compact('barangs'));
@@ -33,6 +37,10 @@ class PengajuanController extends Controller
 
     public function store(Request $request)
     {
+        if (Auth::user()->isAdmin()) {
+            abort(403, 'Admin tidak diizinkan membuat pengajuan barang.');
+        }
+
         $request->validate([
             'barang_id' => 'required|exists:barangs,id',
             'tanggal_pengajuan' => 'required|date',

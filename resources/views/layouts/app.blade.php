@@ -711,11 +711,7 @@
                         <i class="fas fa-bell"></i>
                         <span class="pulse-badge"></span>
                     </a>
-                    @if(Auth::check() && Auth::user()->isAdmin())
-                    <a href="{{ route('barangs.create') }}" class="btn btn-primary btn-sm d-none d-sm-inline-flex">
-                        <i class="fas fa-plus"></i> Tambah Barang
-                    </a>
-                    @endif
+
                 </div>
             </header>
 

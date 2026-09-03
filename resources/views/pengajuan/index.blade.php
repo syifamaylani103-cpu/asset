@@ -9,9 +9,11 @@
             <h1 class="page-title">Pengajuan Barang</h1>
             <p class="page-subtitle mb-0">Kelola dan verifikasi permohonan pengajuan barang dari pengguna.</p>
         </div>
+        @if(!Auth::user()->isAdmin())
         <a href="{{ route('pengajuan.create') }}" class="btn btn-primary">
             <i class="fas fa-plus"></i> Buat Pengajuan Baru
         </a>
+        @endif
     </div>
 
     @if(session('success'))
